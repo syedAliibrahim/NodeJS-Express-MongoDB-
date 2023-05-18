@@ -2,10 +2,19 @@ const fs =require('fs')
 // const index =fs.readFileSync('index.html','utf-8');
 const data = JSON.parse(fs.readFileSync('data.json','utf-8'))
 const products =data.products;
+const productModel = require("..model/product")
 
 exports.create= (req,res)=>{
     console.log(req.body);
-    products.push(req.body);
+    // products.push(req.body);
+    const objToSend =req.body;
+    productModel.create(objToSend,(err, data)=>{
+        if(err){
+            res.send(`internal error: ${err}`)
+        }else{
+            res.send("user successfully create");
+        }
+    })
     res.json(req.body)
  }
  exports.getAll= (req,res)=>{
