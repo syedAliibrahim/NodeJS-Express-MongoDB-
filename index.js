@@ -12,7 +12,7 @@ const DBURI =
 mongoose
   .connect(DBURI)
   .then((res)=>console.log("mongodb connect"))
-  .catch((err)=>console.log("DB ERROR",err));
+  .catch((err)=> console.log("DB Error",err));
 //aliibrahim-- admin p
 //123456 --Db p
 ///body Parser 
