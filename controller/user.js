@@ -4,24 +4,21 @@ const data = JSON.parse(fs.readFileSync('data.json','utf-8'))
 const products =data.products;
 const userModel = require('../model/users')
 const mongoose = require("mongoose");
-// const Product = module.Product;
+const jwt =require('jsonwebtoken')
+
+
+// create user
 
 exports.create= (req,res)=>{
     console.log(req.body);
-   //  products.push(req.body);
-   //    res.status(201).json(req.body);
 
-   // const objToSend =req.body;
-   // productModel.create(objToSend,(err,data)=>{
-   //   if(err){
-   //    res.send(`internal error :${err}`)
-   //   }else{
-   //    res.send("user successfully");
-   //   }
-   // });
+    const user= new userModel(req.body);
 
-   const user= new userModel(req.body);
-   console.log(user)
+    var token = jwt.sign({ email: req.body.email }, process.env.SECRET);
+    user.token = token
+   //  var token = jwt.sign({ email: req.body.email },'shhhhh');
+   //  user.token =token;
+   // console.log(user)
    // product.title ='phoneX';
    // product.price ='phoneX';
    user.save().then(savedDoc =>{
@@ -34,18 +31,20 @@ exports.create= (req,res)=>{
    //    res.status(201).json(doc);
    // })
  };
+
+
  exports.getAll= async (req,res)=>{
-   const products = await userModel.find();
+   const activity = await userModel.find();
    //{price:{$gt:500}}
-    res.json(products);
+    res.json(activity);
  };
  exports.getId = async(req,res)=>{
     // console.log(req.params)
     const id= req.params.id;
     console.log({id})
    //  const product =products.find(p=>p.id===id)
-   const product =await userModel.findById(id)
-    res.json(product);
+   const activity =await userModel.findById(id)
+    res.json(activity);
  }
  exports.replace = async(req,res)=>{
     // console.log(req.params)

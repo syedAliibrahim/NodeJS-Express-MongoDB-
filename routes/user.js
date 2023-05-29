@@ -7,7 +7,7 @@ router
 //// Products
 ///API ROOT , Base URL, example-GOOGLE.COM/API/V2
 ///create product //produnct     /// C R U D
- .post('/',userController.create)
+//  .post('/',userController.create)
 // Read Get /product
   .get('/',userController.getAll)
 ///// Read Get /product /:ID
